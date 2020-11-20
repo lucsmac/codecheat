@@ -9,7 +9,20 @@
   },
   "dependencies": {
     "next": "9.5.5",
+    "prism-react-renderer": "^1.1.1",
+    "prismic-dom": "^2.2.4",
+    "prismic-javascript": "^3.0.2",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "sass": "^1.27.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.5",
+    "@types/prismic-dom": "^2.1.1",
+    "@types/react": "^16.9.53",
+    "@types/styled-components": "^5.1.4",
+    "babel-plugin-styled-components": "^1.11.1",
+    "styled-components": "^5.2.0",
+    "typescript": "^4.0.5"
   }
 }
