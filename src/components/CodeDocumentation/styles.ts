@@ -37,6 +37,10 @@ export const SectionContent = styled.div`
     font-size: .9rem;
     font-family: ${props => props.theme.fonts};
 
-    opacity: .7;
+    opacity: 1;
+  }
+
+  img {
+    max-width: 100%;
   }
 `

@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import SearchBar from "@/components/SearchBar";
 import SearchNavigation from "@/components/SearchNavigation";
-import SearchResults from "@/components/SearchSearchResults";
+import SearchResults from "@/components/SearchResults";
 import { Wrapper, Container } from "@/styles/pages/search";
 import Head from "next/head";
 

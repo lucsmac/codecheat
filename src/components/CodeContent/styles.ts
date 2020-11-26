@@ -5,6 +5,10 @@ export const Container = styled.div`
 
   padding-left: 4rem;
   padding-bottom: 10vh;
+
+  @media screen and (max-width: 768px) {
+    padding-left: 0;
+  }
 `
 
 export const Title = styled.h1`

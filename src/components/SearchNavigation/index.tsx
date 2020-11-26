@@ -3,7 +3,7 @@ import { Container, Title, MobileButton, Nav, CategoriesWrapper, Category, Categ
 import { Document } from 'prismic-javascript/types/documents'
 
 import PrismicDOM from 'prismic-dom'
-import { useState } from 'react'
+import { SyntheticEvent, useState, useRef } from 'react'
 
 interface NavigationProps {
   categories: Document[];
@@ -12,12 +12,18 @@ interface NavigationProps {
 
 export default function SearchNavigation({ categories, subcategories }: NavigationProps) {
   const [currExpand, setcurrExpand] = useState('')
+  const mobileBtn = useRef(null)
+  const nav = useRef(null)
+  
+  const handleCategoriesDropdown = (e: SyntheticEvent) => {
+    mobileBtn.current.classList.toggle('expand')
+    nav.current.classList.toggle('expand')
+  }
   
   return (
     <Container>
-      <Title>Categorias</Title>
-      <MobileButton />
-      <Nav>
+      <Title onClick={handleCategoriesDropdown}>Categorias<MobileButton ref={mobileBtn}></MobileButton></Title>
+      <Nav ref={nav}>
         <CategoriesWrapper>
           {categories.map(category => (
             <Category key={category.uid} onClick={() => setcurrExpand(currExpand === category.id ? '' : category.id)}>

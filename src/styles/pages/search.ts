@@ -31,7 +31,8 @@ export const Container = styled.div`
       "results"
       / 1fr;
 
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-top: 112px;
   }
 `

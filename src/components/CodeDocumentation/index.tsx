@@ -15,7 +15,7 @@ export default function CodeDocumentation({ code, currentSection }: CodeDocument
 
   const sections = [motivation, construction, casesExample]
 
-  const handleScroll = (currentSection) => {
+  const handleScroll = (currentSection: string) => {
     if(typeof window !== undefined && currentSection) {
       const sec = sections.find((section) => section.current.id == currentSection)
       const savePoint = sec.current.offsetTop - 35

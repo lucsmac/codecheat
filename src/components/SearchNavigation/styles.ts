@@ -14,15 +14,40 @@ export const Title = styled.h2`
   font-weight: bold;
 
   margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+
+  @media screen and (max-width: 768px) {
+    cursor: pointer;
+    margin-bottom: 2rem;
+  }
 `
 
-export const MobileButton = styled.span`
+export const MobileButton = styled.div`
+  margin-left: 20px;
+
+  width: 0; 
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
   
+  border-bottom: 5px solid #FFF;
+
+  transition: all .2s ease;
+
+  &.expand {
+    transform: rotate(180deg);
+  }
 `
 
 export const Nav = styled.nav`
   @media screen and (max-width: 768px) {
     display: none;
+    padding-bottom: 5rem;
+
+    &.expand {
+      display: block;
+    }
   }
 `
 

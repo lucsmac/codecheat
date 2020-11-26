@@ -104,6 +104,8 @@ export const VariableField = styled.input`
   color: rgba(255, 255, 255, 0.8);
   font-size: 1rem;
 
+  box-sizing: border-box;
+
   &:focus {
     outline: none;
   }
@@ -120,12 +122,20 @@ export const CodeWrapper = styled.div`
 export const Code = styled.div`
   position: relative;
   max-width: 680px;
+
+  @media screen and (max-width: 768px) {
+    max-width: calc(100vw - 14%);
+  }
 `
 
 export const Pre = styled.pre`
   padding: 1rem 1.5rem;
   border-radius: .5rem;
   max-width: 680px;
+
+  @media screen and (max-width: 768px) {
+    max-width: calc(100vw - 14%);
+  }
 
   .linesContainer {
     padding-bottom: 1rem;

@@ -9,6 +9,16 @@ export const Container = styled.div`
   justify-content: space-between;
 
   position: fixed;
+
+  @media screen and (max-width: 768px) {
+    position: initial;
+    height: auto;
+
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    /* align-items: end; */
+  }
 `
 
 export const Back = styled.span`
@@ -26,6 +36,10 @@ export const Back = styled.span`
   &:hover {
     transform: translate3d(5px, 0, 0);
   }
+
+  @media screen and (max-width: 768px) {
+    justify-self: center;
+  }
 `
 
 export const Title = styled.h2`
@@ -38,10 +52,6 @@ export const Title = styled.h2`
   cursor: pointer;
 
   transition: all .2s ease;
-
-  &:hover {
-    /* transform: translate3d(5px, 0, 0); */
-  }
 `
 
 export const NavWrapper = styled.div`
@@ -75,7 +85,7 @@ export const ButtonsWrapper = styled.div`
   align-items: flex-start;
   align-content: center;
   width: 100%;
-  margin-bottom: 10vh;
+  margin: 10vh 0;
 `
 
 export const Button = styled.button`
