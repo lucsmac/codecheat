@@ -4,6 +4,9 @@ import theme from "prism-react-renderer/themes/vsDark";
 import PrismicDOM from 'prismic-dom'
 import { FormEvent, useEffect, useState } from "react";
 import { Document } from 'prismic-javascript/types/documents'
+import OrdinaryField from "../fields/OrdinaryField";
+import ObjectField from "../fields/ObjectField";
+import ArrayField from "../fields/ArrayField";
 
 interface CodeGeneratorProps {
   code: Document;
@@ -16,16 +19,36 @@ interface IFieldsStateProps {
 }
 
 export default function CodeGenerator({ code }: CodeGeneratorProps) {
-  const defaultCode = code.data.code[0].text
+  // gerando a descição do script
+
+  const getScriptDate = () => {
+    const formatDateItemToTwoDigits = (item: number) => String(item).length < 2 ? `0${item}` : item
+    
+    const date = new Date()
+    const day = formatDateItemToTwoDigits(date.getDate())
+    const month = formatDateItemToTwoDigits(date.getMonth())
+    const year = date.getFullYear()
+
+    return `${day}/${month}/${year}`
+  }
+
+  const scriptCreationDate = getScriptDate()
+
+  const scriptDescription = `<!-- ${scriptCreationDate} | ${code.data.title[0].text} -->
+`
+
+  // fim da descrição do script
+
+  const defaultCode = scriptDescription + code.data.code[0].text
   const [finalCode, setFinalCode] = useState(defaultCode)
 
   const [copied, setCopied] = useState(false)
+
 
   // cria uma array com os estados dos campos dinâmicos
   const dynamicFieldsState: IFieldsStateProps[] = code.data.dynamic_fields.map((dynamicField) => {
     const [field, setField] = useState('')
     const id = dynamicField.id[0].text
-    console.log(id)
     const fieldState = {
       id,
       field,
@@ -45,16 +68,16 @@ export default function CodeGenerator({ code }: CodeGeneratorProps) {
   }
 
   // atualiza o codigo
-  const handleDynamicFieldChange = (e: FormEvent<HTMLInputElement>, id: string) => {
+  const handleDynamicFieldChange = (newValue: string, id: string) => {
     const { setField } = findStatePropsById(id)
-    const fieldValue = e.currentTarget.value
+    const fieldValue = newValue
 
     setField(fieldValue)
   }
 
   // cria o código
   const updateCode = (dynamicFields: IFieldsStateProps[]): string => {
-    const dirtyCode = code.data.code[0].text
+    const dirtyCode = scriptDescription + code.data.code[0].text
     
     const updatedCode = dynamicFields.reduce((code, { id, field }) => {
       return code.replace(`#codecheat%${id.toLowerCase()}`, field)
@@ -81,7 +104,8 @@ export default function CodeGenerator({ code }: CodeGeneratorProps) {
 
       <Variables>
         {code.data.dynamic_fields.map((field, i) => (
-          <Variable key={`${field.title}-${i}`}>
+          <Variable key={`${field.id[0].text}-${i}`}>
+
             <VariableHeader>
               <VariableTitle>{PrismicDOM.RichText.asText(field.field_title)}</VariableTitle>
               <VariableInfo>
@@ -89,7 +113,11 @@ export default function CodeGenerator({ code }: CodeGeneratorProps) {
                 <p>{PrismicDOM.RichText.asText(field.field_help)}</p>
               </VariableInfo>
             </VariableHeader>
-            <VariableField onChange={(e) => handleDynamicFieldChange(e, field.id[0].text)}></VariableField>
+
+            { field.is_array ? <ArrayField field={field} handleChange={handleDynamicFieldChange} /> :
+              field.type === 'object' ? <ObjectField handleChange={handleDynamicFieldChange} field={field} /> :
+              <OrdinaryField handleChange={(e) => handleDynamicFieldChange(e.currentTarget.value, field.id[0].text)}/>}
+
           </Variable>
         ))}
       </Variables>

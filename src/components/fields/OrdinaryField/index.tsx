@@ -1,9 +1,7 @@
-import { Container } from "./styles";
+import { Field } from "./styles";
 
-export default function OrdinaryField() {
+export default function OrdinaryField({ handleChange }) {
   return (
-    <Container>
-      <span>Campos comuns</span>
-    </Container>
+    <Field onChange={handleChange} />
   )
 }

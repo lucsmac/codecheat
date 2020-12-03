@@ -165,9 +165,16 @@ export const Pre = styled.pre`
 export const Line = styled.div`
   margin: 0.2rem 0;
   max-width: 100%;
+
+  &:first-child {
+    span {
+      color: rgba(255, 255, 255, 0.35) !important;
+    }
+  }
 `
 
-export const LineNumber = styled.span`
+export const LineNumber = styled.p`
+  display: inline;
   font-family: ${props => props.theme.fonts};
   font-weight: 300;
   font-size: .85rem;
