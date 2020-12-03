@@ -24,8 +24,10 @@ export default function CodeGenerator({ code }: CodeGeneratorProps) {
   // cria uma array com os estados dos campos dinâmicos
   const dynamicFieldsState: IFieldsStateProps[] = code.data.dynamic_fields.map((dynamicField) => {
     const [field, setField] = useState('')
+    const id = dynamicField.id[0].text
+    console.log(id)
     const fieldState = {
-      id: dynamicField.field_title[0].text,
+      id,
       field,
       setField
     }
@@ -87,7 +89,7 @@ export default function CodeGenerator({ code }: CodeGeneratorProps) {
                 <p>{PrismicDOM.RichText.asText(field.field_help)}</p>
               </VariableInfo>
             </VariableHeader>
-            <VariableField onChange={(e) => handleDynamicFieldChange(e, field.field_title[0].text)}></VariableField>
+            <VariableField onChange={(e) => handleDynamicFieldChange(e, field.id[0].text)}></VariableField>
           </Variable>
         ))}
       </Variables>

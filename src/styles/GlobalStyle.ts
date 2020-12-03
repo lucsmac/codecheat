@@ -63,4 +63,22 @@ export default createGlobalStyle`
       outline: none;
     }
   }
+
+  @media screen and (max-width: 768px) {
+    #_next {
+      &::before {
+        content: 'Visualização disponível somente em desktop';
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        position: absolute;
+        z-index: 9999;
+        background-color: #1A1A1A;
+        color: #FFF;
+        justify-content: center;
+        align-items: center;
+        font-size: 3rem;
+      }
+    }
+  }
 `

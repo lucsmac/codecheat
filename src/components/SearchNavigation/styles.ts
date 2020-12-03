@@ -31,12 +31,18 @@ export const MobileButton = styled.div`
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   
+  display: none;
+  
   border-bottom: 5px solid #FFF;
 
   transition: all .2s ease;
 
   &.expand {
     transform: rotate(180deg);
+  }
+
+  @media screen and (max-width: 768px) {
+    display: block;
   }
 `
 

@@ -12,7 +12,8 @@ export const ScriptItem = styled.div`
   display: grid;
   grid-template: 
   "thumbnail title"
-  "thumbnail description" 1fr;
+  "thumbnail description" 1fr
+  / 150px 1fr;
   grid-column-gap: 30px;
   grid-row-gap: 20px;
 

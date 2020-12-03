@@ -10,6 +10,7 @@ import CodeContentNavigation from '@/components/CodeContentNavigation'
 import CodeContent from '@/components/CodeContent'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import MobileOverlay from '@/components/MobileOverlay'
 
 interface CodeProps {
   code: Document;
@@ -27,6 +28,8 @@ export default function Code({ code }: CodeProps) {
   
   return (
     <Wrapper>
+      <MobileOverlay />
+
       <Head>
         <title>Search | Codecheat</title>
       </Head>
