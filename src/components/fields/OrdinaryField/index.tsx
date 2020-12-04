@@ -1,7 +1,7 @@
 import { Field } from "./styles";
 
-export default function OrdinaryField({ handleChange }) {
+export default function OrdinaryField({ handleChange, name = '' }) {
   return (
-    <Field onChange={handleChange} />
+    <Field name={name} onChange={handleChange} />
   )
 }

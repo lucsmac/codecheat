@@ -46,12 +46,12 @@ export const RemoveField = styled.span`
   align-items: center;
   justify-content: center;
 
-  color: rgba(255, 255, 255, .45);
-  cursor: pointer;
+  color: ${(props: RemoveProps) => props.isPossibleRemove ? 'rgba(255, 255, 255, .45)' : 'rgba(255, 255, 255, .25)'};
+  cursor: ${(props: RemoveProps) => props.isPossibleRemove ? 'pointer' : 'default'};
 
   transition: all .2s ease;
 
   &:hover {
-    color: ${(props: RemoveProps) => props.isPossibleRemove ? 'rgba(210, 20, 20, .8)' : 'rgba(255, 255, 255, .45)'};
+    color: ${(props: RemoveProps) => props.isPossibleRemove ? 'rgba(210, 20, 20, .8)' : 'rgba(255, 255, 255, .25)'};
   } 
 `
