@@ -1,8 +1,7 @@
-import { captureRejectionSymbol } from "events";
-import { FormEvent, useEffect, useRef, useState } from "react";
-import ObjectField from "../ObjectField";
+import { useEffect, useState } from "react";
+import ArrayObjectField from "../ArrayObjectField";
 import OrdinaryField from "../OrdinaryField";
-import { Container, FieldsWrapper, Counter, RemoveField, InputFieldWrapper, ButtonField } from "./styles";
+import { Container, FieldsWrapper, RemoveField, InputFieldWrapper, ButtonField } from "./styles";
 
 export default function ArrayField({ field, handleChange }) {
   // id prefixo
@@ -14,7 +13,7 @@ export default function ArrayField({ field, handleChange }) {
 
   // manipulação do counter
   const removeField = (id) => {
-    const itemToRemove = fieldsData.findIndex(fieldData => fieldData === id)
+    const itemToRemove = fieldsData.findIndex(([fieldId]) => fieldId === id)
     setFieldsData(() => fieldsData.filter((item, i) => i !== itemToRemove))
   }
 
@@ -22,9 +21,7 @@ export default function ArrayField({ field, handleChange }) {
     setFieldsCounter(fieldsCounter + 1)
   }
 
-  const updateFieldValue = (e) => {
-    const newValue = e.currentTarget.value
-    const id = e.target.name
+  const updateFieldValue = (newValue, id) => {
     setFieldsData(() => {
       return fieldsData.map((field) => field[0] === id ? [field[0], newValue] : field)
     })
@@ -33,9 +30,9 @@ export default function ArrayField({ field, handleChange }) {
   const getFinalArray = () => {
     return `[ ${fieldsData.reduce((all, [, value], index, array) => {
       if(index === (array.length - 1)) {
-        return all + `'${value}'`
+        return all + `${value}`
       }
-      return all + `'${value}', `
+      return all + `${value}, `
     }, '')} ]`
   }
 
@@ -60,7 +57,17 @@ export default function ArrayField({ field, handleChange }) {
 
             <RemoveField isPossibleRemove={!!(fieldsCounter > 1)} onClick={() => removeField(`${fieldId}`)}>x</RemoveField>
 
-            { field.type[0].text === 'object' ? <ObjectField field={field} handleChange={() => {}}></ObjectField> : <OrdinaryField name={String(fieldId).replace(',', '')} handleChange={(e) => updateFieldValue(e)}></OrdinaryField> }
+            { field.type === 'object' ? 
+              <ArrayObjectField
+                field={field}
+                id={fieldId}
+                handleChange={updateFieldValue}
+              ></ArrayObjectField> : 
+              <OrdinaryField
+                value={value}
+                name={String(fieldId).replace(',', '')}
+                handleChange={(e) => updateFieldValue(`'${e.currentTarget.value}'`, e.target.name)}
+              ></OrdinaryField> }
 
           </InputFieldWrapper>
         )) }

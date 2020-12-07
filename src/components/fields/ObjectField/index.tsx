@@ -6,18 +6,31 @@ export default function ObjectField({ handleChange, field }) {
     const initialObjectFieldsString = field.object_fields[0].text
     const trimObjectFieldsString = initialObjectFieldsString.replace(/ /g, '')
     const objectKeys = trimObjectFieldsString.split(',')
+    const onlyKeys = objectKeys.map((keyData) => {
+      const key = keyData.split(':')[0]
+      return key
+    })
     
-    return objectKeys
+    return onlyKeys
   }
   
   const objectKeys = getKeys(field)
+
+  const getKeyType = (key, initialKeysList) => {
+    const keysList = initialKeysList.split(',')
+    const currKey = keysList.find((keyData) => keyData.includes(key))
+    const type = currKey.split(':')[1].replace(' ', '')
+    return type
+  }
 
   // cria uma array com os estados dos campos dinâmicos
   const keysState = objectKeys && objectKeys.map((objectKey: string) => {
     const [key, setKey] = useState('')
     const id = objectKey
+    const type = getKeyType(id, field.object_fields[0].text)
     const keyState = {
       id,
+      type,
       key,
       setKey
     }
@@ -36,9 +49,8 @@ export default function ObjectField({ handleChange, field }) {
 
   // atualiza o codigo
   const handleDynamicKeyChange = (e: FormEvent<HTMLInputElement>, id: string) => {
-    const { setKey } = findStatePropsById(id)
-    const keyValue = e.currentTarget.value
-
+    const { setKey, type } = findStatePropsById(id)
+    const keyValue = type === 'string' ? `'${e.currentTarget.value}'` : e.currentTarget.value
     setKey(keyValue)
   }
 
@@ -58,6 +70,7 @@ export default function ObjectField({ handleChange, field }) {
     const updatedObjectCode = objectKeys.reduce((object, { id, key }) => {
       return object.replace(`%${id.toLowerCase()}`, key)
     }, dirtyObjectCode)
+
 
     return updatedObjectCode
   }

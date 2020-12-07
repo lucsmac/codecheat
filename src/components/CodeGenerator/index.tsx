@@ -26,7 +26,7 @@ export default function CodeGenerator({ code }: CodeGeneratorProps) {
     
     const date = new Date()
     const day = formatDateItemToTwoDigits(date.getDate())
-    const month = formatDateItemToTwoDigits(date.getMonth())
+    const month = formatDateItemToTwoDigits(date.getMonth() + 1)
     const year = date.getFullYear()
 
     return `${day}/${month}/${year}`
