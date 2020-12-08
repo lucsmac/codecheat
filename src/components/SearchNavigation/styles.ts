@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 interface SubCategoriesWrapperProps {
-  expand?: boolean
+  expand?: boolean;
+  activeSubcategory?: boolean;
 }
 
 export const Container = styled.div`
@@ -82,6 +83,7 @@ export const SubCategoriesWrapper = styled.ul`
   grid-row-gap: 15px;
 
   margin-top: 15px;
+  margin-left: 10px;
 
   display: ${(props: SubCategoriesWrapperProps) => props.expand ? 'grid' :  'none'};
 `
@@ -90,7 +92,13 @@ export const SubCategory = styled.li`
   font-size: .9rem;
   font-family: ${props => props.theme.fonts};
   font-weight: 300;
-  opacity: .7;
+  opacity: ${(props: SubCategoriesWrapperProps) => props.activeSubcategory ? '1' :  '.6'};
 
   cursor: pointer;
+
+  transition: all .2s ease;
+
+  &:hover {
+    opacity: 1;
+  }
 `

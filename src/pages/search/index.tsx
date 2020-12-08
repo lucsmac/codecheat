@@ -9,6 +9,7 @@ import { GetServerSideProps } from 'next'
 import { Document } from 'prismic-javascript/types/documents'
 import { client } from '@/lib/prismic'
 import Prismic from 'prismic-javascript'
+import { useEffect, useState } from "react";
 
 interface NavigationProps {
   categories: Document[];
@@ -23,6 +24,24 @@ interface SearchProps {
 }
 
 export default function Search({ categories, subcategories, scripts }: SearchProps) {
+  const [selectedSubcategory, setSelectedSubcategory] = useState(null)
+  const [wordToSearch, setWordToSearch] = useState(null)
+  const [fielteredScripts, setFielteredScripts] = useState(scripts)
+
+  useEffect(() => {
+    if(selectedSubcategory)
+      setFielteredScripts(scripts.filter((script) => script.data.subcategory.slug === selectedSubcategory))
+    else
+      setFielteredScripts(scripts)
+  }, [selectedSubcategory])
+
+  useEffect(() => {
+    if(wordToSearch)
+      setFielteredScripts(scripts.filter((script) => script.data.title[0].text.includes(wordToSearch)))
+    else
+      setFielteredScripts(scripts)
+  }, [wordToSearch])
+  
   return (
     <Wrapper>
       <Head>
@@ -32,10 +51,10 @@ export default function Search({ categories, subcategories, scripts }: SearchPro
       <Header />
 
       <Container>
-        <SearchNavigation categories={categories} subcategories={subcategories} />
+        <SearchNavigation activeSubcategory={selectedSubcategory} handleChange={setSelectedSubcategory} categories={categories} subcategories={subcategories} />
 
-        <SearchBar />
-        <SearchResults scripts={scripts} />
+        <SearchBar handleChange={setWordToSearch} />
+        <SearchResults scripts={fielteredScripts} />
       </Container>
     </Wrapper>
   )

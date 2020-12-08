@@ -61,3 +61,13 @@ export const Description = styled.div`
     }
   }
 `
+
+export const EmptyFilter = styled.h3`
+  width: 100%;
+  font-size: 1.5rem;
+  font-family: ${props => props.theme.fonts};
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: center;
+  color: #d1d1d1;
+`
