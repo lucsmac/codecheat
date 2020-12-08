@@ -2,7 +2,7 @@ import { Container, Info, Variables, Variable, VariableHeader, VariableTitle, Va
 import Highlight, { defaultProps } from 'prism-react-renderer'
 import theme from "prism-react-renderer/themes/vsDark";
 import PrismicDOM from 'prismic-dom'
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Document } from 'prismic-javascript/types/documents'
 import OrdinaryField from "../fields/OrdinaryField";
 import ObjectField from "../fields/ObjectField";
@@ -67,6 +67,11 @@ export default function CodeGenerator({ code }: CodeGeneratorProps) {
     return stateProps
   }
 
+  const getValueById = (id: string): string => {
+    const { field } = dynamicFieldsState.find(field => field.id === id)
+    return field
+  }
+
   // atualiza o codigo
   const handleDynamicFieldChange = (newValue: string, id: string) => {
     const { setField } = findStatePropsById(id)
@@ -116,7 +121,7 @@ export default function CodeGenerator({ code }: CodeGeneratorProps) {
 
             { field.is_array ? <ArrayField field={field} handleChange={handleDynamicFieldChange} /> :
               field.type === 'object' ? <ObjectField handleChange={handleDynamicFieldChange} field={field} /> :
-              <OrdinaryField handleChange={(e) => handleDynamicFieldChange(e.currentTarget.value, field.id[0].text)}/>}
+              <OrdinaryField value={getValueById(field.id[0].text)} handleChange={(e) => handleDynamicFieldChange(e.currentTarget.value, field.id[0].text)}/>}
 
           </Variable>
         ))}
