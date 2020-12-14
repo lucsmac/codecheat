@@ -92,23 +92,11 @@ export const VariableInfo = styled.div`
   }
 `
 
-export const VariableField = styled.input`
-  width: 100%;
-
-  background-color: transparent;
-  border: none;
-  border-bottom: solid 2px rgba(255, 255, 255, 0.2);
-
-  padding: .5rem 3rem .5rem 1rem;
-
-  color: rgba(255, 255, 255, 0.8);
+export const NoVariables = styled.p`
   font-size: 1rem;
-
-  box-sizing: border-box;
-
-  &:focus {
-    outline: none;
-  }
+  font-family: ${props => props.theme.fonts};
+  margin-bottom: 2rem;
+  font-weight: 300;
 `
 
 export const CodeWrapper = styled.div`

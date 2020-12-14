@@ -1,4 +1,4 @@
-import { Container, Info, Variables, Variable, VariableHeader, VariableTitle, VariableInfo, VariableField, CodeWrapper, Code, Pre, Line, LineNumber, LineContent, CopyButton } from "./styles";
+import { Container, Info, Variables, Variable, VariableHeader, VariableTitle, VariableInfo, NoVariables, CodeWrapper, Code, Pre, Line, LineNumber, LineContent, CopyButton } from "./styles";
 import Highlight, { defaultProps } from 'prism-react-renderer'
 import theme from "prism-react-renderer/themes/vsDark";
 import PrismicDOM from 'prismic-dom'
@@ -19,7 +19,9 @@ interface IFieldsStateProps {
 }
 
 export default function CodeGenerator({ code }: CodeGeneratorProps) {
-  // gerando a descição do script
+  // gerando a descrição do script
+
+  console.log(code.data.dynamic_fields[0].id.length)
 
   const getScriptDate = () => {
     const formatDateItemToTwoDigits = (item: number) => String(item).length < 2 ? `0${item}` : item
@@ -48,7 +50,7 @@ export default function CodeGenerator({ code }: CodeGeneratorProps) {
   // cria uma array com os estados dos campos dinâmicos
   const dynamicFieldsState: IFieldsStateProps[] = code.data.dynamic_fields.map((dynamicField) => {
     const [field, setField] = useState('')
-    const id = dynamicField.id[0].text
+    const id = dynamicField.id.length ? dynamicField.id[0].text : ''
     const fieldState = {
       id,
       field,
@@ -105,27 +107,32 @@ export default function CodeGenerator({ code }: CodeGeneratorProps) {
   
   return (
     <Container>
-      <Info>Insira as informações de acordo com o que é pedido, ao final o seu código estará prontinho para você copiar e colar na área destinada no autódromo.</Info>
+      {code.data.dynamic_fields[0].id.length ? (
+          <>
+          <Info>Insira as informações de acordo com o que é pedido, ao final o seu código estará prontinho para você copiar e colar na área destinada no autódromo.</Info>
 
-      <Variables>
-        {code.data.dynamic_fields.map((field, i) => (
-          <Variable key={`${field.id[0].text}-${i}`}>
+          <Variables>
+            {code.data.dynamic_fields.map((field, i) => (
+              <Variable key={`${field.id[0].text}-${i}`}>
 
-            <VariableHeader>
-              <VariableTitle>{PrismicDOM.RichText.asText(field.field_title)}</VariableTitle>
-              <VariableInfo>
-                <span></span>
-                <p>{PrismicDOM.RichText.asText(field.field_help)}</p>
-              </VariableInfo>
-            </VariableHeader>
+                <VariableHeader>
+                  <VariableTitle>{PrismicDOM.RichText.asText(field.field_title)}</VariableTitle>
+                  <VariableInfo>
+                    <span></span>
+                    <p>{PrismicDOM.RichText.asText(field.field_help)}</p>
+                  </VariableInfo>
+                </VariableHeader>
 
-            { field.is_array ? <ArrayField field={field} handleChange={handleDynamicFieldChange} /> :
-              field.type === 'object' ? <ObjectField handleChange={handleDynamicFieldChange} field={field} /> :
-              <OrdinaryField value={getValueById(field.id[0].text)} handleChange={(e) => handleDynamicFieldChange(e.currentTarget.value, field.id[0].text)}/>}
+                { field.is_array ? <ArrayField field={field} handleChange={handleDynamicFieldChange} /> :
+                  field.type === 'object' ? <ObjectField handleChange={handleDynamicFieldChange} field={field} /> :
+                  <OrdinaryField value={getValueById(field.id[0].text)} handleChange={(e) => handleDynamicFieldChange(e.currentTarget.value, field.id[0].text)}/>}
 
-          </Variable>
-        ))}
-      </Variables>
+              </Variable>
+            ))}
+          </Variables>
+          </>
+      ) : (<><NoVariables>Basta copiar o código abaixo e colar na área de FOOTER nas configurações do site no autódromo.</NoVariables></>)}
+      
 
       <CodeWrapper>
         <h2>Código gerado:</h2>
