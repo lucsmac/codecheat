@@ -8,6 +8,11 @@ interface CopyButtonProps {
 export const Container = styled.div`
   position: relative;
   z-index: 50;
+
+  b {
+    font-family: ${props => props.theme.fonts};
+    font-weight: 500;
+  }
 `
 
 export const Info = styled.p`
@@ -132,6 +137,7 @@ export const Pre = styled.pre`
     &::-webkit-scrollbar-track
     {
       -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.3);
+      box-shadow: inset 0 0 2px rgba(0,0,0,0.3);
       background-color: #212121;
     }
 

@@ -21,7 +21,7 @@ interface IFieldsStateProps {
 export default function CodeGenerator({ code }: CodeGeneratorProps) {
   // gerando a descrição do script
 
-  console.log(code.data.dynamic_fields[0].id.length)
+  console.log(code.data.config_area[0].text)
 
   const getScriptDate = () => {
     const formatDateItemToTwoDigits = (item: number) => String(item).length < 2 ? `0${item}` : item
@@ -109,7 +109,7 @@ export default function CodeGenerator({ code }: CodeGeneratorProps) {
     <Container>
       {code.data.dynamic_fields[0].id.length ? (
           <>
-          <Info>Insira as informações de acordo com o que é pedido, ao final o seu código estará prontinho para você copiar e colar na área destinada no autódromo.</Info>
+          <Info>Insira as informações de acordo com o que é pedido, ao final o seu código estará prontinho para você copiar e colar na área de <b>{ code.data.config_area[0].text.toUpperCase() }</b> nas configurações do site no autódromo.</Info>
 
           <Variables>
             {code.data.dynamic_fields.map((field, i) => (
@@ -131,7 +131,7 @@ export default function CodeGenerator({ code }: CodeGeneratorProps) {
             ))}
           </Variables>
           </>
-      ) : (<><NoVariables>Basta copiar o código abaixo e colar na área de FOOTER nas configurações do site no autódromo.</NoVariables></>)}
+      ) : (<><NoVariables>Basta copiar o código abaixo e colar na área de <b>{ code.data.config_area[0].text.toUpperCase() }</b> nas configurações do site no autódromo.</NoVariables></>)}
       
 
       <CodeWrapper>
