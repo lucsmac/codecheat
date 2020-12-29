@@ -2,12 +2,12 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { Container, NavWrapper, Back, Title, Nav, TopicsWrapper, Topic, ButtonsWrapper, Button } from "./styles";
 
-export default function CodeContentNavigation({ setShowScriptGenerator, currentSection, setSection }) {
+export default function CodeContentNavigation({ setShowScriptGenerator, showScriptGenerator, currentSection, setSection }) {
   const motivation = useRef(null)
-  const construction = useRef(null)
+  const tutorial = useRef(null)
   const casesExample = useRef(null)
 
-  const topics = [motivation, construction, casesExample]
+  const topics = [motivation, tutorial, casesExample]
   
   const handleActive = (e) => {
     const el = e.target
@@ -53,18 +53,16 @@ export default function CodeContentNavigation({ setShowScriptGenerator, currentS
             <Topic ref={motivation} data-target="motivation" onClick={handleActive}>
               Motivação
             </Topic>
-            <Topic ref={construction} data-target="construction" onClick={handleActive}>
-              Como foi construído
+            <Topic ref={tutorial} data-target="tutorial" onClick={handleActive}>
+              Como utilizar o script
             </Topic>
-            <Topic ref={casesExample} data-target="cases-example" onClick={handleActive}>
-              Exemplos de uso
-            </Topic>
+            <Topic ref={casesExample} data-target="cases-example" onClick={handleActive}></Topic>
           </TopicsWrapper>
         </Nav>
       </NavWrapper>
 
       <ButtonsWrapper>
-        <Button onClick={() => { handleChangeCodeView(true) }}>Gerar script</Button>
+        <Button active={showScriptGenerator} onClick={() => { handleChangeCodeView(true) }}>Gerador de script</Button>
         <Button>Ajuda</Button>
       </ButtonsWrapper>
     </Container>

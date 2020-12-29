@@ -40,6 +40,11 @@ export const SectionContent = styled.div`
     opacity: 1;
   }
 
+  strong {
+    font-weight: bold;
+    font-family: ${props => props.theme.fonts};
+  }
+
   img {
     max-width: 100%;
   }
