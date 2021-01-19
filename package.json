@@ -8,7 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "9.5.5",
+    "next": "^10.0.5",
     "prism-react-renderer": "^1.1.1",
     "prismic-dom": "^2.2.4",
     "prismic-javascript": "^3.0.2",
