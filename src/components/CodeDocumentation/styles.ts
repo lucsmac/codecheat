@@ -31,13 +31,29 @@ export const SectionContent = styled.div`
   display: grid;
   grid-row-gap: 1rem;
 
-  p {
-    font-weight: 300;
+  p, li {
     line-height: 1.3;
     font-size: .9rem;
-    font-family: ${props => props.theme.fonts};
 
-    opacity: 1;
+    opacity: .9;
+  }
+
+  strong, p, ol, ul, li, h1, h2, h3, h4, h5, h6, em {
+    font-family: ${props => props.theme.fonts};
+    font-weight: 300;
+  }
+
+  ul {
+    padding-left: 1rem;
+    border-left: 4px solid #333;
+  }
+
+  strong {
+    font-weight: bold;
+  }
+
+  em {
+    font-style: italic;
   }
 
   img {

@@ -10,10 +10,10 @@ interface CodeDocumentationProps {
 
 export default function CodeDocumentation({ code, currentSection }: CodeDocumentationProps) {
   const motivation = useRef(null)
-  const construction = useRef(null)
+  const tutorial = useRef(null)
   const casesExample = useRef(null)
 
-  const sections = [motivation, construction, casesExample]
+  const sections = [motivation, tutorial, casesExample]
 
   const handleScroll = (currentSection: string) => {
     if(typeof window !== undefined && currentSection) {
@@ -32,21 +32,21 @@ export default function CodeDocumentation({ code, currentSection }: CodeDocument
       <Subtitle>Entenda o código</Subtitle>
 
       <Content>
-        <section ref={motivation} id="motivation">
+        {code.data.motivation[0].text && <section ref={motivation} id="motivation">
           <SectionTitle>Motivação</SectionTitle>
           <SectionContent dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(code.data.motivation) }}>
           </SectionContent>
-        </section>
-        <section ref={construction} id="construction">
-          <SectionTitle>Como foi construído</SectionTitle>
-          <SectionContent dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(code.data.construction) }}>
+        </section>}
+        {code.data.tutorial[0].text && <section ref={tutorial} id="tutorial">
+          <SectionTitle>Como utilizar o script</SectionTitle>
+          <SectionContent dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(code.data.tutorial) }}>
           </SectionContent>
-        </section>
-        <section ref={casesExample} id="cases-example">
+        </section>}
+        {code.data.use_cases[0].text && <section ref={casesExample} id="cases-example">
           <SectionTitle>Exemplo de uso</SectionTitle>
           <SectionContent dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(code.data.use_cases) }}>
           </SectionContent>
-        </section>
+        </section>}
       </Content>
     </Container>
   )

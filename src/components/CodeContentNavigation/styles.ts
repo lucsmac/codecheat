@@ -1,9 +1,15 @@
 import styled from "styled-components";
 
+interface ButotnScriptProps {
+  active?: boolean
+}
+
 export const Container = styled.div`
   grid-area: nav;
 
   height: 80vh;
+  width: 20vw;
+  max-width: 250px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -89,10 +95,10 @@ export const ButtonsWrapper = styled.div`
 `
 
 export const Button = styled.button`
-  color: white;
-  padding: .6rem 4rem;
+  color: ${(props: ButotnScriptProps) => props.active ? '#000' : '#FFF'};
+  padding: .6rem 2rem;
   border: 1px solid white;
-  background-color: transparent;
+  background-color: ${(props: ButotnScriptProps) => props.active ? '#FFF' : 'transparent'};
   border-radius: 50px;
   text-align: center;
   width: 100%;

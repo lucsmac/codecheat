@@ -37,7 +37,7 @@ export default function Code({ code }: CodeProps) {
       <Header />
 
       <Container>
-        <CodeContentNavigation currentSection={currentSection} setSection={setCurrentSection} setShowScriptGenerator={setShowScriptGenerator} />
+        <CodeContentNavigation showScriptGenerator={showScriptGenerator} currentSection={currentSection} setSection={setCurrentSection} setShowScriptGenerator={setShowScriptGenerator} />
         <CodeContent currentSection={currentSection} code={code} showScriptGenerator={showScriptGenerator} />
       </Container>
     </Wrapper>
