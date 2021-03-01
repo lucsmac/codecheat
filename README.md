@@ -1,30 +1,22 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Codecheat
 
-## Getting Started
+ Web application developed in Next.js and Typescript that allows AutoForce's customer success team, and any interested, to search and quickly use scripts that solve customer demands, solving some workflow obstacles in the company.
+ 
+![Home](https://user-images.githubusercontent.com/55163413/109441939-85a4bd00-7a15-11eb-9bb9-c6c9688cc8cb.png)
+![Listing](https://user-images.githubusercontent.com/55163413/109441968-97866000-7a15-11eb-8c36-88d37c184c69.png)
+![Script page](https://user-images.githubusercontent.com/55163413/109442058-d87e7480-7a15-11eb-8cca-490e55c05669.png)
 
-First, run the development server:
+ ## Tech
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+* Next
+* Typescript
+* Styled Components
+* Prismic
+
+## How to use
+
+After you clone the project, you can run:
+
+### `yarn install && yarn start`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
