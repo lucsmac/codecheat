@@ -8,7 +8,7 @@ export default function CodeContentNavigation({ setShowScriptGenerator, showScri
   const casesExample = useRef(null)
 
   const topics = [motivation, tutorial, casesExample]
-  
+
   const handleActive = (e) => {
     const el = e.target
     Array.prototype.forEach.call(el.parentNode.childNodes, (child) => child.classList.remove('active'))
@@ -22,7 +22,7 @@ export default function CodeContentNavigation({ setShowScriptGenerator, showScri
       window.scrollTo(0, 0)
     }
   }
-  
+
   const handleChangeCodeView = (show) => {
     setShowScriptGenerator(show)
     scrollToTop()
@@ -40,7 +40,7 @@ export default function CodeContentNavigation({ setShowScriptGenerator, showScri
   useEffect(() => {
     cleanNavItemsActiveClasses()
   }, [currentSection])
-  
+
   return (
     <Container>
       <NavWrapper>
@@ -51,7 +51,7 @@ export default function CodeContentNavigation({ setShowScriptGenerator, showScri
         <Nav>
           <TopicsWrapper>
             <Topic ref={motivation} data-target="motivation" onClick={handleActive}>
-              Motivação
+              Propósito
             </Topic>
             <Topic ref={tutorial} data-target="tutorial" onClick={handleActive}>
               Como utilizar o script

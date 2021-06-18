@@ -25,7 +25,7 @@ export const VariableField = styled.input`
 
   background-color: transparent;
   border: none;
-  border-bottom: solid 2px rgba(255, 255, 255, 0.2);
+  border-bottom: solid 1px rgba(255, 255, 255, 0.2);
 
   padding: .5rem 3rem .5rem 1rem;
 

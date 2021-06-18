@@ -26,14 +26,14 @@ export default function CodeDocumentation({ code, currentSection }: CodeDocument
   useEffect(() => {
     handleScroll(currentSection)
   }, [currentSection])
-  
+
   return (
     <Container>
       <Subtitle>Entenda o código</Subtitle>
 
       <Content>
         {code.data.motivation[0].text && <section ref={motivation} id="motivation">
-          <SectionTitle>Motivação</SectionTitle>
+          <SectionTitle>Propósito</SectionTitle>
           <SectionContent dangerouslySetInnerHTML={{ __html: PrismicDOM.RichText.asHtml(code.data.motivation) }}>
           </SectionContent>
         </section>}
