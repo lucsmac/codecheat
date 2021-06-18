@@ -205,12 +205,12 @@ export const CopyButton = styled.button<CopyButtonProps>`
   ${({ isDisabled }) => {
     if( isDisabled ) {
       return css`
-        color: #222;
+        color: #555;
         background-color: #333;
         cursor: no-drop;
 
         &.copied, &.copied:hover, &:hover {
-          color: #222;
+          color: #555;
           background-color: #333;
         }
       `
