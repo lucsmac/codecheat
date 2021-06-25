@@ -37,9 +37,8 @@ export default function CodeGenerator({ code }: CodeGeneratorProps) {
 
   const scriptCreationDate = getScriptDate()
 
-  const scriptDescription = `<!-- ${scriptCreationDate} | ${code.data.title[0].text}
-  Inserido por: ${username}
-  Pelo motivo: ${motivation}
+  const scriptDescription = `<!-- ${scriptCreationDate} | ${code.data.title[0].text} | Por: ${username}
+  Contexto: ${motivation || 'não informado *'}
 -->
   `
 
@@ -105,6 +104,7 @@ export default function CodeGenerator({ code }: CodeGeneratorProps) {
 
   // copiar o código para o clipboard
   const handleCopyCode = (codeToCopy: string) => {
+    if (!username) return
     navigator.clipboard.writeText(codeToCopy)
     setCopied(true)
   }
@@ -124,8 +124,8 @@ export default function CodeGenerator({ code }: CodeGeneratorProps) {
             </InfoField>
             <InfoField>
               <label>
-                Motivação *
-                <OrdinaryField placeholder="Descreva brevemente qual a sua necessidade..." name="motivation" value={motivation} handleChange={(e) => setMotivation(e.target.value)}/>
+                Contexto
+                <OrdinaryField placeholder="Motivo de utilização do script..." name="motivation" value={motivation} handleChange={(e) => setMotivation(e.target.value)}/>
               </label>
             </InfoField>
           </InfoFields>
@@ -172,7 +172,7 @@ export default function CodeGenerator({ code }: CodeGeneratorProps) {
               </Pre>
             )}
           </Highlight>
-          <CopyButton isDisabled={!username || !motivation} isCopied={copied} onClick={() => handleCopyCode(finalCode)}>{ copied ? 'Copiado' : 'Copiar' }{ !username || !motivation ? ' *' : '' }</CopyButton>
+          <CopyButton isDisabled={!username} isCopied={copied} onClick={() => handleCopyCode(finalCode)}>{ copied ? 'Copiado' : 'Copiar' }{ !username ? ' *' : '' }</CopyButton>
         </Code>
       </CodeWrapper>
     </Container>

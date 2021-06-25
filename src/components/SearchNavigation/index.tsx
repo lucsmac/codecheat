@@ -16,7 +16,7 @@ export default function SearchNavigation({ categories, subcategories, handleChan
   const [currExpand, setcurrExpand] = useState('')
   const mobileBtn = useRef(null)
   const nav = useRef(null)
-  
+
   const handleCategoriesDropdown = (e: SyntheticEvent) => {
     mobileBtn.current.classList.toggle('expand')
     nav.current.classList.toggle('expand')
@@ -26,10 +26,6 @@ export default function SearchNavigation({ categories, subcategories, handleChan
     handleChange(slug)
   }
 
-  useEffect(() => {
-    console.log(currExpand)
-  }, [currExpand])
-  
   return (
     <Container>
       <Title onClick={handleCategoriesDropdown}>Categorias<MobileButton ref={mobileBtn}></MobileButton></Title>
